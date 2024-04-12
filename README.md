@@ -6,7 +6,11 @@ This project was generated with [Vite](https://vitejs.dev/) version 4.3.8.
 
 ### Development server
 
-Run `npm run dev` for a dev server. Navigate to `http://localhost:9000/`. The app will automatically reload if you change any of the source files.
+### Run 
+1. `npm install` 
+2. `npm run dev` for a dev server. 
+
+Navigate to `http://localhost:9000/`. The app will automatically reload if you change any of the source files.
 
 #### Steps to create and add a new custom node to the flow builder
 
