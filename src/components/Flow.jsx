@@ -38,14 +38,6 @@ export default function Flow() {
     const edgesFromStore = useEdgeStore(state => state.edges);
     const setEdges = useEdgeStore(state => state.setEdges);
 
-    /**
-     * @param {object[]} nodes
-     * @description
-     * Applies changes to nodes and update the nodes in the store.
-     * @see https://reactflow.dev/docs/api/react-flow-props/#onnodeschange
-     * @see https://reactflow.dev/docs/api/graph-util-functions/#applynodechanges
-     * @see https://reactflow.dev/docs/api/hooks/use-nodes-state/
-     */
     const onNodesChange = useCallback(
         changes => {
             const updates = applyNodeChanges(changes, nodesFromStore);
@@ -54,14 +46,6 @@ export default function Flow() {
         [nodesFromStore, setNodes],
     );
 
-    /**
-     * @param {object[]} edges
-     * @description
-     * Applies changes to edges and update the edges in the store.
-     * @see https://reactflow.dev/docs/api/react-flow-props/#onedgeschange-2
-     * @see https://reactflow.dev/docs/api/graph-util-functions/#applyedgechanges
-     * @see https://reactflow.dev/docs/api/hooks/use-edges-state/
-     */
     const onEdgesChange = useCallback(
         changes => {
             const updates = applyNodeChanges(changes, edgesFromStore);
@@ -70,22 +54,10 @@ export default function Flow() {
         [edgesFromStore, setEdges],
     );
 
-    /**
-     * @param {object} event
-     * @description
-     * Prevents the default behavior of the browser when dragging over the flow.
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Drag_operations#drag_effects
-     */
     const onDragOver = useCallback(event => {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'copy';
     }, []);
-
-    /**
-     * @param {object} event
-     * @description
-     * Prevents the default behavior of the browser when dropping over the flow.
-     */
 
     const onDrop = useCallback(
         event => {
@@ -108,11 +80,6 @@ export default function Flow() {
         [reactFlowInstance, addNode],
     );
 
-    /**
-     * @param {array} nodes
-     * @description
-     * Sets the first selected node in the store.
-     */
     const onSelectionChange = useCallback(
         ({ nodes }) => {
             if (nodes.length) {
@@ -122,13 +89,6 @@ export default function Flow() {
         [setSelectedNode],
     );
 
-    /**
-     * @param {object} params
-     * @description
-     * Adds an edge to the store.
-     * @see https://reactflow.dev/docs/api/react-flow-props/#onconnect-1
-     * @see https://reactflow.dev/docs/api/graph-util-functions/#addedge
-     */
     const onConnect = useCallback(
         params => {
             setEdges(addEdge(params, edgesFromStore));
@@ -136,11 +96,6 @@ export default function Flow() {
         [setEdges, edgesFromStore],
     );
 
-    /**
-     * @description
-     * Sets the selected node to null.
-     * This is used to unselect a node in the store when the user deletes the selected node.
-     */
     const onNodesDelete = useCallback(() => {
         setSelectedNode(null);
     }, [setSelectedNode]);
